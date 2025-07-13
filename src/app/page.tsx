@@ -6,6 +6,7 @@ import LandingSection from '@/components/LandingSection';
 import GateSection from '@/components/GateSection';
 import ContentSection from '@/components/ContentSection';
 import EasterEggModal from '@/components/EasterEggModal';
+import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 
 export default function Home() {
   const {
@@ -84,6 +85,9 @@ export default function Home() {
         showEasterEgg={showEasterEgg}
         onClose={() => setShowEasterEgg(false)}
       />
+
+      {/* Analytics Dashboard */}
+      <AnalyticsDashboard isDarkMode={isDarkMode} />
     </>
   );
 }
