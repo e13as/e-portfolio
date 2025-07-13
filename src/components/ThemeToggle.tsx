@@ -19,7 +19,10 @@ export default function ThemeToggle({ isDarkMode, isAnimating, toggleTheme }: Th
       <motion.button
         onClick={toggleTheme}
         disabled={isAnimating}
-        className="w-12 h-8 md:w-16 md:h-10 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl border-2 border-gray-600 cursor-pointer shadow-lg transition-all duration-300 disabled:cursor-not-allowed relative overflow-hidden"
+        className={
+          `w-16 h-10 bg-gradient-to-br from-yellow-200 to-gray-700 rounded-full border-2 border-gray-400 cursor-pointer shadow-lg transition-all duration-300 disabled:cursor-not-allowed relative overflow-hidden flex items-center`
+          + ' group'
+        }
         animate={isAnimating ? {
           scale: [1, 1.1, 1],
           rotate: [0, 2, -2, 0]
@@ -28,102 +31,31 @@ export default function ThemeToggle({ isDarkMode, isAnimating, toggleTheme }: Th
           duration: 0.8,
           ease: "easeInOut"
         }}
-        whileHover={!isAnimating ? { scale: 1.05 } : {}}
+        whileHover={!isAnimating ? {
+          scale: 1.04,
+          boxShadow: isDarkMode
+            ? '0 0 8px 2px #60a5fa, 0 0 12px 4px #1e293b' // sanftes blau-grau für Dark Mode
+            : '0 0 8px 2px #fde68a, 0 0 12px 4px #fef9c3', // sanftes gelb für Light Mode
+          background: isDarkMode
+            ? 'linear-gradient(90deg, #222, #334155 80%)'
+            : 'linear-gradient(90deg, #fef9c3, #fde68a 80%)'
+        } : {}}
         whileTap={!isAnimating ? { scale: 0.95 } : {}}
       >
-        {/* Controller Body */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg"></div>
-        
-        {/* Controller Grips */}
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-2 md:w-3 h-4 md:h-6 bg-gray-800 rounded-l-lg"></div>
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 md:w-3 h-4 md:h-6 bg-gray-800 rounded-r-lg"></div>
-        
-        {/* D-Pad */}
-        <div className="absolute left-1 md:left-2 top-1/2 transform -translate-y-1/2 w-3 md:w-4 h-3 md:h-4 bg-gray-500 rounded-sm">
-          <div className="absolute inset-0.5 bg-gray-600 rounded-sm"></div>
-        </div>
-        
-        {/* Action Buttons */}
-        <div className="absolute right-1 md:right-2 top-1/2 transform -translate-y-1/2 flex gap-0.5 md:gap-1">
-          <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-gray-500 rounded-full"></div>
-          <div className="w-1.5 md:w-2 h-1.5 md:h-2 bg-gray-500 rounded-full"></div>
-        </div>
-        
-        {/* LED Indicators */}
-        <div className="absolute top-0.5 md:top-1 left-1/2 transform -translate-x-1/2 flex gap-0.5 md:gap-1">
-          <motion.div 
-            className={`w-1 md:w-1.5 h-1 md:h-1.5 rounded-full ${
-              isDarkMode ? 'bg-red-500' : 'bg-blue-500'
-            }`}
-            animate={isAnimating ? {
-              scale: [1, 1.5, 1],
-              opacity: [1, 0.5, 1]
-            } : {
-              scale: [1, 1.2, 1],
-              opacity: [1, 0.7, 1]
-            }}
-            transition={{ 
-              duration: 1,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          />
-          <motion.div 
-            className={`w-1 md:w-1.5 h-1 md:h-1.5 rounded-full ${
-              isDarkMode ? 'bg-red-500' : 'bg-blue-500'
-            }`}
-            animate={isAnimating ? {
-              scale: [1, 1.5, 1],
-              opacity: [1, 0.5, 1]
-            } : {
-              scale: [1, 1.2, 1],
-              opacity: [1, 0.7, 1]
-            }}
-            transition={{ 
-              duration: 1,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.3
-            }}
-          />
-          <motion.div 
-            className={`w-1 md:w-1.5 h-1 md:h-1.5 rounded-full ${
-              isDarkMode ? 'bg-red-500' : 'bg-blue-500'
-            }`}
-            animate={isAnimating ? {
-              scale: [1, 1.5, 1],
-              opacity: [1, 0.5, 1]
-            } : {
-              scale: [1, 1.2, 1],
-              opacity: [1, 0.7, 1]
-            }}
-            transition={{ 
-              duration: 1,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.6
-            }}
-          />
-        </div>
-        
-        {/* Start/Select Buttons */}
-        <div className="absolute bottom-0.5 md:bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 md:gap-2">
-          <div className="w-0.5 md:w-1 h-0.5 md:h-0.5 bg-gray-500 rounded-full"></div>
-          <div className="w-0.5 md:w-1 h-0.5 md:h-0.5 bg-gray-500 rounded-full"></div>
-        </div>
+        {/* Toggle Track */}
+        <div className={`absolute inset-0 rounded-full transition-colors duration-300 ${isDarkMode ? 'bg-gray-800' : 'bg-yellow-200'}`}></div>
+        {/* Emoji Toggle Knob */}
+        <motion.div
+          className="absolute flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-full shadow-lg bg-white/80 text-[1.6rem] top-1/2 -translate-y-1/2 left-1"
+          animate={{
+            x: isDarkMode ? -3.2 : 22
+          }}
+          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          style={{ lineHeight: 1 }}
+        >
+          {isDarkMode ? '🌙' : '🌞'}
+        </motion.div>
       </motion.button>
-      
-      {/* Power Indicator */}
-      <motion.div 
-        className="absolute -top-4 md:-top-6 left-1/2 transform -translate-x-1/2 text-xs font-bold"
-        animate={isAnimating ? {
-          scale: [1, 1.5, 1],
-          y: [0, -5, 0]
-        } : {}}
-        transition={{ duration: 0.8 }}
-      >
-        {isDarkMode ? "🔴" : "🔵"}
-      </motion.div>
     </motion.div>
   );
 } 

@@ -401,7 +401,7 @@ export default function ContentSection({
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>React</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Angular</span>
                     <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>95%</span>
                   </div>
                   <div className={`w-full rounded-full h-2 ${
@@ -477,16 +477,16 @@ export default function ContentSection({
               <div className="space-y-3">
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Node.js</span>
-                    <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>88%</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Python</span>
+                    <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>60%</span>
                   </div>
                   <div className={`w-full rounded-full h-2 ${
                     isDarkMode ? 'bg-gray-800' : 'bg-gray-200'
                   }`}>
                     <motion.div 
-                      className="bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full"
+                      className="bg-gradient-to-r from-yellow-400 to-yellow-300 h-2 rounded-full"
                       initial={{ width: 0 }}
-                      whileInView={{ width: "88%" }}
+                      whileInView={{ width: "60%" }}
                       transition={{ duration: 1.5, ease: "easeOut", delay: 0.4 }}
                     />
                   </div>
@@ -528,14 +528,14 @@ export default function ContentSection({
 
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>PostgreSQL</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>MariaDB</span>
                     <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>85%</span>
                   </div>
                   <div className={`w-full rounded-full h-2 ${
                     isDarkMode ? 'bg-gray-800' : 'bg-gray-200'
                   }`}>
                     <motion.div 
-                      className="bg-gradient-to-r from-blue-600 to-blue-500 h-2 rounded-full"
+                      className="bg-gradient-to-r from-blue-600 to-blue-400 h-2 rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: "85%" }}
                       transition={{ duration: 1.5, ease: "easeOut", delay: 0.7 }}
@@ -587,16 +587,16 @@ export default function ContentSection({
 
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>AWS</span>
-                    <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>70%</span>
+                    <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Postman</span>
+                    <span className={isDarkMode ? 'text-green-400' : 'text-green-600'}>90%</span>
                   </div>
                   <div className={`w-full rounded-full h-2 ${
                     isDarkMode ? 'bg-gray-800' : 'bg-gray-200'
                   }`}>
                     <motion.div 
-                      className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-2 rounded-full"
+                      className="bg-gradient-to-r from-orange-400 to-orange-300 h-2 rounded-full"
                       initial={{ width: 0 }}
-                      whileInView={{ width: "70%" }}
+                      whileInView={{ width: "90%" }}
                       transition={{ duration: 1.5, ease: "easeOut", delay: 1.0 }}
                     />
                   </div>
@@ -641,7 +641,11 @@ export default function ContentSection({
                   : 'bg-white border-green-300 hover:shadow-green-500/30'
               }`}
             >
-              <div className="text-4xl mb-3">🇮🇷</div>
+              <div className="flex items-center justify-center gap-2 text-2xl mb-3">
+                <a href="https://fa.wikipedia.org/wiki/%D8%B2%D8%A8%D8%A7%D9%86_%D9%81%D8%A7%D8%B1%D8%B3%DB%8C" target="_blank" rel="noopener noreferrer"><span className="fi fi-ir flag-interactive"></span></a>
+                <a href="https://fa.wikipedia.org/wiki/%D8%B2%D8%A8%D8%A7%D9%86_%D9%81%D8%A7%D8%B1%D8%B3%DB%8C" target="_blank" rel="noopener noreferrer"><span className="fi fi-af flag-interactive"></span></a>
+                <a href="https://fa.wikipedia.org/wiki/%D8%B2%D8%A8%D8%A7%D9%86_%D9%81%D8%A7%D8%B1%D8%B3%DB%8C" target="_blank" rel="noopener noreferrer"><span className="fi fi-tj flag-interactive"></span></a>
+              </div>
               <h3 className={`text-xl font-semibold mb-2 ${
                 isDarkMode ? 'text-green-300' : 'text-green-600'
               }`}>Persian</h3>
@@ -671,7 +675,11 @@ export default function ContentSection({
                   : 'bg-white border-green-300 hover:shadow-green-500/30'
               }`}
             >
-              <div className="text-4xl mb-3">🇩🇪</div>
+              <div className="flex items-center justify-center gap-2 text-2xl mb-3">
+                <a href="https://de.wikipedia.org/wiki/Deutsche_Sprache" target="_blank" rel="noopener noreferrer"><span className="fi fi-de flag-interactive"></span></a>
+                <a href="https://de.wikipedia.org/wiki/Deutsche_Sprache" target="_blank" rel="noopener noreferrer"><span className="fi fi-at flag-interactive"></span></a>
+                <a href="https://de.wikipedia.org/wiki/Deutsche_Sprache" target="_blank" rel="noopener noreferrer"><span className="fi fi-ch flag-interactive"></span></a>
+              </div>
               <h3 className={`text-xl font-semibold mb-2 ${
                 isDarkMode ? 'text-green-300' : 'text-green-600'
               }`}>German</h3>
@@ -701,7 +709,10 @@ export default function ContentSection({
                   : 'bg-white border-green-300 hover:shadow-green-500/30'
               }`}
             >
-              <div className="text-4xl mb-3">🇺🇸</div>
+              <div className="flex items-center justify-center gap-2 text-2xl mb-3">
+                <a href="https://en.wikipedia.org/wiki/English_language" target="_blank" rel="noopener noreferrer"><span className="fi fi-us flag-interactive"></span></a>
+                <a href="https://en.wikipedia.org/wiki/English_language" target="_blank" rel="noopener noreferrer"><span className="fi fi-gb flag-interactive"></span></a>
+              </div>
               <h3 className={`text-xl font-semibold mb-2 ${
                 isDarkMode ? 'text-green-300' : 'text-green-600'
               }`}>English</h3>

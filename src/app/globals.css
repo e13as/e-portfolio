@@ -1,3 +1,4 @@
+@import 'flag-icons/css/flag-icons.min.css';
 @import "tailwindcss";
 
 :root {
@@ -52,6 +53,23 @@ body {
   content: '_';
   animation: blink 1s step-end infinite;
   margin-left: 2px;
+}
+
+.flag-interactive {
+  border-radius: 0.22em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  padding: 0.02em 0.08em;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: middle;
+}
+.flag-interactive:hover {
+  transform: scale(1.13) rotate(-3deg);
+  box-shadow: 0 4px 16px 2px #fde68a, 0 0 0 2px #22d3ee;
+  z-index: 2;
 }
 
 
