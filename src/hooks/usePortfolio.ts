@@ -2,8 +2,9 @@
 
 import { useState, useEffect, FormEvent } from 'react';
 import confetti from 'canvas-confetti';
+import { config } from '@/config/env';
 
-const SECRET = process.env.NEXT_PUBLIC_GATE_CODE ?? '';
+const SECRET = config.gateCode;
 
 export function usePortfolio() {
   const [step, setStep] = useState<'landing' | 'gate' | 'content'>('landing');
@@ -159,8 +160,9 @@ export function usePortfolio() {
     if (lockedUntil && lockedUntil > new Date()) {
       return; // do nothing if locked
     }
-  
-    if (code === SECRET) {
+
+    // Vergleich robust machen
+    if (code.trim().toUpperCase() === SECRET.trim().toUpperCase()) {
       // correct → reset
       localStorage.removeItem('gateAttempts');
       localStorage.removeItem('gateLockUntil');
@@ -169,14 +171,14 @@ export function usePortfolio() {
       // wrong → count up
       const tries = Number(localStorage.getItem('gateAttempts') || 0) + 1;
       localStorage.setItem('gateAttempts', String(tries));
-  
+
       if (tries >= 3) {
         // 1 hour lock
         const lockTs = new Date(Date.now() + 60 * 60 * 1000);
         localStorage.setItem('gateLockUntil', lockTs.toISOString());
         setLockedUntil(lockTs);
       }
-  
+
       setError(true);
       setTimeout(() => setError(false), 700);
     }

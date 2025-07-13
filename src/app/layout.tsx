@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import { config } from '@/config/env'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,13 +47,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
-        {gaMeasurementId && <GoogleAnalytics measurementId={gaMeasurementId} />}
+        {config.gaMeasurementId && <GoogleAnalytics measurementId={config.gaMeasurementId} />}
       </body>
     </html>
   )

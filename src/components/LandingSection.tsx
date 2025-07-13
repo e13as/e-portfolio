@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
+import { useState, useEffect } from 'react';
 
 interface LandingSectionProps {
   isDarkMode: boolean;
@@ -11,9 +12,24 @@ interface LandingSectionProps {
 }
 
 export default function LandingSection({ isDarkMode, time, onEnter }: LandingSectionProps) {
-  const hh = time.getHours().toString().padStart(2, '0');
-  const mm = time.getMinutes().toString().padStart(2, '0');
-  const ss = time.getSeconds().toString().padStart(2, '0');
+  const [timeDisplay, setTimeDisplay] = useState({ hh: '00', mm: '00', ss: '00' });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const updateTime = () => {
+      const now = new Date();
+      setTimeDisplay({
+        hh: now.getHours().toString().padStart(2, '0'),
+        mm: now.getMinutes().toString().padStart(2, '0'),
+        ss: now.getSeconds().toString().padStart(2, '0')
+      });
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -106,7 +122,7 @@ export default function LandingSection({ isDarkMode, time, onEnter }: LandingSec
           }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          {hh}
+          {isClient ? timeDisplay.hh : '00'}
         </motion.span>
         <motion.span 
           animate={{ 
@@ -132,7 +148,7 @@ export default function LandingSection({ isDarkMode, time, onEnter }: LandingSec
           }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          {mm}
+          {isClient ? timeDisplay.mm : '00'}
         </motion.span>
         <motion.span 
           animate={{ 
@@ -169,7 +185,7 @@ export default function LandingSection({ isDarkMode, time, onEnter }: LandingSec
             boxShadow: { repeat: Infinity, duration: 2 }
           }}
         >
-          {ss}
+          {isClient ? timeDisplay.ss : '00'}
         </motion.span>
       </motion.div>
 
