@@ -5,6 +5,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import LandingSection from '@/components/LandingSection';
 import GateSection from '@/components/GateSection';
 import ContentSection from '@/components/ContentSection';
+import LoadingSection from '@/components/LoadingSection';
 import EasterEggModal from '@/components/EasterEggModal';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 
@@ -16,6 +17,8 @@ export default function Home() {
     error,
     isDarkMode,
     isAnimating,
+    isLoading,
+    isInitialized,
     showForm,
     formSent,
     sending,
@@ -47,35 +50,43 @@ export default function Home() {
           : 'bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800'
       }`}>
         <div className="z-10 text-center px-4">
-          {step === 'landing' && (
-            <LandingSection 
-              isDarkMode={isDarkMode}
-              time={time}
-              onEnter={() => setStep('gate')}
-            />
-          )}
-          
-          {step === 'gate' && (
-            <GateSection 
-              code={code}
-              error={error}
-              lockedUntil={lockedUntil}
-              onCodeChange={setCode}
-              onUnlock={handleUnlock}
-            />
-          )}
-          
-          {step === 'content' && (
-            <ContentSection 
-              isDarkMode={isDarkMode}
-              showForm={showForm}
-              formSent={formSent}
-              sending={sending}
-              formError={formError}
-              onShowForm={() => setShowForm(true)}
-              onSubmit={handleSubmit}
-              onResetForm={handleResetForm}
-            />
+          {isLoading ? (
+            <LoadingSection isDarkMode={isDarkMode} />
+          ) : isInitialized ? (
+            <>
+              {step === 'landing' && (
+                <LandingSection 
+                  isDarkMode={isDarkMode}
+                  time={time}
+                  onEnter={() => setStep('gate')}
+                />
+              )}
+              
+              {step === 'gate' && (
+                <GateSection 
+                  code={code}
+                  error={error}
+                  lockedUntil={lockedUntil}
+                  onCodeChange={setCode}
+                  onUnlock={handleUnlock}
+                />
+              )}
+              
+              {step === 'content' && (
+                <ContentSection 
+                  isDarkMode={isDarkMode}
+                  showForm={showForm}
+                  formSent={formSent}
+                  sending={sending}
+                  formError={formError}
+                  onShowForm={() => setShowForm(true)}
+                  onSubmit={handleSubmit}
+                  onResetForm={handleResetForm}
+                />
+              )}
+            </>
+          ) : (
+            <LoadingSection isDarkMode={isDarkMode} />
           )}
         </div>
       </main>
