@@ -8,7 +8,32 @@ import { config } from '@/config/env';
 const SECRET = config.gateCode;
 
 export function usePortfolio() {
-  const [step, setStep] = useState<'landing' | 'gate' | 'content'>('landing');
+  // Initialize step from localStorage or default to 'landing'
+  const [step, setStep] = useState<'landing' | 'gate' | 'content'>(() => {
+    if (typeof window !== 'undefined') {
+      const savedStep = localStorage.getItem('portfolioStep') as 'landing' | 'gate' | 'content';
+      const gateExpires = localStorage.getItem('gateCodeExpires');
+      
+      // Check if gate code is still valid
+      if (savedStep === 'content' && gateExpires) {
+        const expiresAt = parseInt(gateExpires);
+        if (Date.now() < expiresAt) {
+          return 'content'; // Gate code still valid
+        } else {
+          // Gate code expired, clear storage and go to landing
+          localStorage.removeItem('portfolioStep');
+          localStorage.removeItem('gateCodeExpires');
+          return 'landing';
+        }
+      }
+      
+      return savedStep || 'landing';
+    }
+    return 'landing';
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [time, setTime] = useState(new Date());
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
@@ -44,8 +69,10 @@ export function usePortfolio() {
     }
   }, [isDarkMode]);
 
-  // Konami Code Easter Egg
+  // Konami Code Easter Egg - only active on content page
   useEffect(() => {
+    if (step !== 'content') return; // Only active on content page
+    
     const sequence = [
       'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
       'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
@@ -64,7 +91,7 @@ export function usePortfolio() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [step]); // Add step as dependency
 
   // Audio unlock
   useEffect(() => {
@@ -81,8 +108,9 @@ export function usePortfolio() {
     return () => clearInterval(id);
   }, []);
 
-  // Check for locked gate
+  // Handle initialization and loading
   useEffect(() => {
+    // Check for locked gate
     const ts = localStorage.getItem('gateLockUntil');
     if (ts) {
       const parsed = new Date(ts);
@@ -93,7 +121,17 @@ export function usePortfolio() {
         localStorage.removeItem('gateLockUntil');
       }
     }
-  }, []);
+
+    // Show loading for all pages on initial load
+    if (!isInitialized) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setIsInitialized(true);
+      }, 4000); // Increased to 4 seconds for full loading bar
+      return () => clearTimeout(timer);
+    }
+  }, [isInitialized]);
 
   function triggerEasterEgg() {
     confetti({
@@ -164,10 +202,16 @@ export function usePortfolio() {
 
     // Vergleich robust machen
     if (code.trim().toUpperCase() === SECRET.trim().toUpperCase()) {
-      // correct → reset
+      // correct → reset attempts
       localStorage.removeItem('gateAttempts');
       localStorage.removeItem('gateLockUntil');
-      setStep('content');
+      
+      // Show loading before going to content
+      setIsLoading(true);
+      setTimeout(() => {
+        updateStep('content'); // Use updateStep to handle localStorage
+        setIsLoading(false);
+      }, 4000); // Same duration as initial loading
     } else {
       // wrong → count up
       const tries = Number(localStorage.getItem('gateAttempts') || 0) + 1;
@@ -191,6 +235,20 @@ export function usePortfolio() {
     setShowForm(false);
   };
 
+  // Custom setStep function that also saves to localStorage
+  const updateStep = (newStep: 'landing' | 'gate' | 'content') => {
+    setStep(newStep);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolioStep', newStep);
+      
+      // If going to content, ensure gate code expiration is set
+      if (newStep === 'content') {
+        const expiresAt = Date.now() + (4 * 60 * 60 * 1000); // 4 hours
+        localStorage.setItem('gateCodeExpires', expiresAt.toString());
+      }
+    }
+  };
+
   return {
     // State
     step,
@@ -199,6 +257,8 @@ export function usePortfolio() {
     error,
     isDarkMode,
     isAnimating,
+    isLoading,
+    isInitialized,
     showForm,
     formSent,
     sending,
@@ -207,7 +267,7 @@ export function usePortfolio() {
     showEasterEgg,
     
     // Actions
-    setStep,
+    setStep: updateStep,
     setCode,
     toggleTheme,
     handleSubmit,
