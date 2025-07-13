@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import confetti from 'canvas-confetti';
 import { config } from '@/config/env';
 
+// Gate code from environment variables
 const SECRET = config.gateCode;
 
 export function usePortfolio() {
