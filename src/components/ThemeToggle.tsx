@@ -48,7 +48,7 @@ export default function ThemeToggle({ isDarkMode, isAnimating, toggleTheme }: Th
         <motion.div
           className="absolute flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-full shadow-lg bg-white/80 text-[1.6rem] top-1/2 -translate-y-1/2 left-1"
           animate={{
-            x: isDarkMode ? -3.2 : 22
+            x: isDarkMode ? -3.5 : 22
           }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           style={{ lineHeight: 1 }}

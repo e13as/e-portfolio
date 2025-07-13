@@ -85,7 +85,7 @@ export default function ContentSection({
               <p className={`text-base md:text-lg leading-relaxed mb-4 md:mb-6 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                I'm Elias – a Full-Stack Developer with a passion for clean code and creative interfaces.
+                I'm Elias, a Full-Stack Developer with a passion for clean code and creative interfaces.
               </p>
               
               <p className={`text-sm md:text-base leading-relaxed mb-4 md:mb-6 ${
