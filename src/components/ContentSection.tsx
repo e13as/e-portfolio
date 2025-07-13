@@ -105,7 +105,7 @@ export default function ContentSection({
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                  <span>React & Next.js</span>
+                  <span>Angular & Next.js</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
