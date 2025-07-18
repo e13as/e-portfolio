@@ -20,23 +20,30 @@ export default function GateSection({ code, error, lockedUntil, onCodeChange, on
     >
       <h2 className="text-green-400 text-2xl mb-6">// Access Gate</h2>
 
-      <input
-        autoFocus
-        type="text"
-        placeholder="Enter secret code"
-        value={code}
-        onChange={(e) => onCodeChange(e.target.value.toUpperCase())}
-        className={`w-full px-4 py-3 rounded bg-black border ${
-          error ? 'border-red-500 animate-shake' : 'border-green-500'
-        } text-green-400 placeholder-gray-500 outline-none font-mono mb-4`}
-      />
-
-      <button
-        onClick={onUnlock}
-        className="w-full flex justify-center items-center gap-2 py-3 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition"
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          onUnlock();
+        }}
       >
-        Unlock <Check size={18} />
-      </button>
+        <input
+          autoFocus
+          type="text"
+          placeholder="Enter secret code"
+          value={code}
+          onChange={(e) => onCodeChange(e.target.value.toUpperCase())}
+          className={`w-full px-4 py-3 rounded bg-black border ${
+            error ? 'border-red-500 animate-shake' : 'border-green-500'
+          } text-green-400 placeholder-gray-500 outline-none font-mono mb-4`}
+        />
+
+        <button
+          type="submit"
+          className="w-full flex justify-center items-center gap-2 py-3 bg-green-500 text-black font-bold rounded hover:bg-green-400 transition"
+        >
+          Unlock <Check size={18} />
+        </button>
+      </form>
 
       {error && (
         <p className="flex items-center gap-1 text-red-500 mt-3 text-sm">

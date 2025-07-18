@@ -125,13 +125,14 @@ export function usePortfolio() {
     // Show loading for all pages on initial load
     if (!isInitialized) {
       setIsLoading(true);
+      const loadingDuration = step === 'content' ? 2000 : 4000;
       const timer = setTimeout(() => {
         setIsLoading(false);
         setIsInitialized(true);
-      }, 4000); // Increased to 4 seconds for full loading bar
+      }, loadingDuration); // 2s für Reload auf Inhalt, sonst 4s
       return () => clearTimeout(timer);
     }
-  }, [isInitialized]);
+  }, [isInitialized, step]);
 
   function triggerEasterEgg() {
     confetti({

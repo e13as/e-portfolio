@@ -28,17 +28,17 @@ export default function ContentSection({
   return (
     <>
       {/* Navbar */}
-      <nav className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 border px-3 md:px-6 py-2 rounded-full shadow-lg flex gap-2 md:gap-6 text-xs md:text-sm font-semibold tracking-wider z-50 ${
+      <nav className={`fixed flex flex-col items-start gap-2 top-20 left-2 right-auto sm:flex-row sm:items-center sm:gap-6 sm:top-4 sm:left-1/2 sm:-translate-x-1/2 border px-3 md:px-6 py-2 rounded-full shadow-lg text-xs md:text-sm font-semibold tracking-wider z-50 ${
         isDarkMode 
           ? 'bg-[#111] border-green-500 text-green-400' 
           : 'bg-white/90 border-green-400 text-green-600 backdrop-blur-sm'
       }`}>
-        <a href="#about" className="hover:text-yellow-300 whitespace-nowrap">About</a>
-        <a href="#projects" className="hover:text-yellow-300 whitespace-nowrap">Projects</a>
-        <a href="#skills" className="hover:text-yellow-300 whitespace-nowrap">Skills</a>
-        <a href="#languages" className="hover:text-yellow-300 whitespace-nowrap hidden sm:inline">Languages</a>
-        <a href="#certificates" className="hover:text-yellow-300 whitespace-nowrap hidden lg:inline">Certificates</a>
-        <a href="#contact" className="hover:text-yellow-300 whitespace-nowrap">Contact</a>
+        <a href="#about" className="hover:text-yellow-300 whitespace-nowrap w-full sm:w-auto text-left sm:text-center">About</a>
+        <a href="#projects" className="hover:text-yellow-300 whitespace-nowrap w-full sm:w-auto text-left sm:text-center">Projects</a>
+        <a href="#skills" className="hover:text-yellow-300 whitespace-nowrap w-full sm:w-auto text-left sm:text-center">Skills</a>
+        <a href="#languages" className="hover:text-yellow-300 whitespace-nowrap hidden sm:inline w-full sm:w-auto text-left sm:text-center">Languages</a>
+        <a href="#certificates" className="hover:text-yellow-300 whitespace-nowrap hidden lg:inline w-full sm:w-auto text-left sm:text-center">Certificates</a>
+        <a href="#contact" className="hover:text-yellow-300 whitespace-nowrap w-full sm:w-auto text-left sm:text-center">Contact</a>
       </nav>
 
       {/* About */}
