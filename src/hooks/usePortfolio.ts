@@ -57,6 +57,10 @@ export function usePortfolio() {
   const [keys, setKeys] = useState<string[]>([]);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
 
+  // Auto-Hide Menü State
+  const [showMenu, setShowMenu] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   // Theme toggle function
   const toggleTheme = () => {
     if (isAnimating) return;
@@ -146,6 +150,22 @@ export function usePortfolio() {
       return () => clearTimeout(timer);
     }
   }, [isInitialized, step]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY < 40) {
+        setShowMenu(true);
+      } else if (currentY > lastScrollY) {
+        setShowMenu(false); // nach unten scrollen → ausblenden
+      } else {
+        setShowMenu(true); // nach oben scrollen → einblenden
+      }
+      setLastScrollY(currentY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   function triggerEasterEgg() {
     confetti({
@@ -279,6 +299,7 @@ export function usePortfolio() {
     formError,
     lockedUntil,
     showEasterEgg,
+    showMenu, // <--- exportiere showMenu
     
     // Actions
     setStep: updateStep,

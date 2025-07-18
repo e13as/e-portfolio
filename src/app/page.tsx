@@ -32,6 +32,7 @@ export default function Home() {
     handleResetForm,
     setShowForm,
     setShowEasterEgg,
+    showMenu,
   } = usePortfolio();
 
   return (
@@ -41,6 +42,7 @@ export default function Home() {
         isDarkMode={isDarkMode}
         isAnimating={isAnimating}
         toggleTheme={toggleTheme}
+        showMenu={showMenu}
       />
 
       <main className={`relative min-h-screen flex items-center justify-center text-white font-mono transition-colors duration-500 ${
