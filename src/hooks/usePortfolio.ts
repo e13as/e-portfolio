@@ -37,7 +37,15 @@ export function usePortfolio() {
   const [time, setTime] = useState(new Date());
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // Theme state initialisieren aus localStorage
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('portfolioTheme');
+      if (stored === 'light') return false;
+      if (stored === 'dark') return true;
+    }
+    return true; // Default: Dark Mode
+  });
   const [isAnimating, setIsAnimating] = useState(false);
 
   const [showForm, setShowForm] = useState(false);
@@ -53,9 +61,14 @@ export function usePortfolio() {
   const toggleTheme = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    
     setTimeout(() => {
-      setIsDarkMode(!isDarkMode);
+      setIsDarkMode(prev => {
+        const next = !prev;
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('portfolioTheme', next ? 'dark' : 'light');
+        }
+        return next;
+      });
       setIsAnimating(false);
     }, 800);
   };
