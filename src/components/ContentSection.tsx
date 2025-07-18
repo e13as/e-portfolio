@@ -28,18 +28,18 @@ export default function ContentSection({
   return (
     <>
       {/* Navbar */}
-      <nav className={`fixed flex flex-row items-center gap-2 top-4 left-2 right-auto max-w-[98vw] px-2 py-1 rounded-2xl shadow-lg text-[0.85rem] font-normal tracking-wide z-50
+      <nav className={`fixed flex flex-row items-center gap-1 top-4 left-2 w-auto max-w-[220px] px-1 py-1 rounded-xl shadow-lg text-[0.78rem] font-normal tracking-wide z-50
         sm:left-1/2 sm:-translate-x-1/2 sm:gap-6 sm:px-6 sm:py-2 sm:rounded-full sm:text-sm sm:font-semibold
         ${isDarkMode 
           ? 'bg-[#111] border border-green-500 text-green-400' 
           : 'bg-white/90 border border-green-400 text-green-600 backdrop-blur-sm'}
       `}>
-        <a href="#about" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap">About</a>
-        <a href="#projects" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap">Projects</a>
-        <a href="#skills" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap">Skills</a>
-        <a href="#languages" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap hidden sm:inline">Languages</a>
-        <a href="#certificates" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap hidden lg:inline">Certificates</a>
-        <a href="#contact" className="hover:text-yellow-300 px-2 py-1 whitespace-nowrap">Contact</a>
+        <a href="#about" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap">About</a>
+        <a href="#projects" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap">Projects</a>
+        <a href="#skills" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap">Skills</a>
+        <a href="#languages" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap hidden sm:inline">Languages</a>
+        <a href="#certificates" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap hidden lg:inline">Certificates</a>
+        <a href="#contact" className="hover:text-yellow-300 px-1 py-1 whitespace-nowrap">Contact</a>
       </nav>
 
       {/* About */}
